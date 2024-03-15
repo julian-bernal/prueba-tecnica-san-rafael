@@ -11,9 +11,11 @@ class DashboardServices {
         Uri.parse('${ServiceRoutes.routeApi}dashboard'),
       );
 
+      print( 'Por aca: ' + response.body);
       if (response.statusCode == 200) 
       {
         final Dashboard dashboardData = dashboardFromJson(response.body);
+
 
         if (dashboardData.status) {
           return dashboardData.data;
