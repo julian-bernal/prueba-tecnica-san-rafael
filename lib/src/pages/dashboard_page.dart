@@ -42,10 +42,14 @@ class DashboardPage extends StatelessWidget {
                       padding: const EdgeInsets.all(20.0),
                       child: Container(
                         width: double.infinity,
-                        child: Column(
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.primary,
+                          borderRadius: BorderRadius.circular(13.5),
+                        ),
+                        child: const Column(
                           children: [
-                            const SizedBox(height: 20),
-                            const Text(
+                            SizedBox(height: 20),
+                            Text(
                               'Tutorial',
                               style: TextStyle(
                                 color:  Colors.white,
@@ -53,7 +57,7 @@ class DashboardPage extends StatelessWidget {
                               ),
                             ),
                             // const SizedBox(height: 1),
-                            const Text(
+                            Text(
                               'Institucional',
                               style: TextStyle(
                                 color:  Colors.white,
@@ -61,12 +65,8 @@ class DashboardPage extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            const SizedBox(height: 20),
+                            SizedBox(height: 20),
                           ],
-                        ),
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.primary,
-                          borderRadius: BorderRadius.circular(13.5),
                         )
                       ),
                     ),
@@ -87,25 +87,25 @@ class DashboardPage extends StatelessWidget {
                                 onPressed: () {
                                   // Acción cuando se presiona el botón
                                 },
-                                child:  SvgPicture.network(
+                                style: ElevatedButton.styleFrom(
+                                  shape: const CircleBorder(), // Forma circular para el botón
+                                  padding: const EdgeInsets.all(16), // Espaciado interno
+                                  backgroundColor: Theme.of(context).colorScheme.primary
+                                ),
+                                child: SvgPicture.network(
                                   color: Colors.white,
                                   //dar mayor grosor a los iconos
                                   state.dashboardItems[index].icon,
                                   width: 75,
                                   height: 75,
                                 ),
-                                style: ElevatedButton.styleFrom(
-                                  shape: CircleBorder(), // Forma circular para el botón
-                                  padding: EdgeInsets.all(16), // Espaciado interno
-                                  backgroundColor: Theme.of(context).colorScheme.primary
-                                ),
                               ),
-                              SizedBox(height: 10), // Espacio entre el botón y el texto
+                              const SizedBox(height: 10), // Espacio entre el botón y el texto
                               // Texto debajo del botón
                               Text(
                                 state.dashboardItems[index].title,
                                 textAlign: TextAlign.center,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 16,
                                 ),
