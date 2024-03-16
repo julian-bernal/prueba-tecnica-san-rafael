@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -16,19 +18,13 @@ class DashboardPage extends StatelessWidget {
       create: (context) => DashboardServices(),
       child: BlocProvider<DashboardBloc>(
         create: (context) => DashboardBloc(
-          RepositoryProvider.of<DashboardServices>(context))..add(LoadDashboardEvent()
+          RepositoryProvider.of<DashboardServices>(context))..add(
+            LoadDashboardEvent()
         ),
         child: Scaffold(
           appBar: AppBar(
             centerTitle: true,
-            backgroundColor: const Color(0xff582C5F),
-            title: const Text('San Rafael Contigo', 
-              style: TextStyle( 
-                color: Colors.white, fontSize: 20, 
-                fontWeight: FontWeight.bold, 
-                fontFamily: 'Lobster'
-              ),
-            ),
+            title: const Text('San Rafael Contigo'),
           ),
           body: BlocBuilder<DashboardBloc, DashboardState>(
             builder: (context, state) {
@@ -40,32 +36,44 @@ class DashboardPage extends StatelessWidget {
               if (state is DashboardLoadedState) {
               
                 return Column(
+
                   children: [
-                    Container(
-                      child: Column(
-                        children: [
-                          const SizedBox(height: 20),
-                          const Text(
-                            'Totorial',
-                            style: TextStyle(
-                              fontSize: 16,
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Container(
+                        width: double.infinity,
+                        child: Column(
+                          children: [
+                            const SizedBox(height: 20),
+                            const Text(
+                              'Tutorial',
+                              style: TextStyle(
+                                color:  Colors.white,
+                                fontSize: 25,
+                              ),
                             ),
-                          ),
-                          const SizedBox(height: 20),
-                          const Text(
-                            'Institucional',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
+                            // const SizedBox(height: 1),
+                            const Text(
+                              'Institucional',
+                              style: TextStyle(
+                                color:  Colors.white,
+                                fontSize: 40,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
-                          const SizedBox(height: 20),
-                        ],
+                            const SizedBox(height: 20),
+                          ],
+                        ),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.primary,
+                          borderRadius: BorderRadius.circular(13.5),
+                        )
                       ),
                     ),
                     Expanded(
                       child: GridView.builder(
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        gridDelegate: 
+                        const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2, // Dos iconos por fila
                           crossAxisSpacing: 10,
                           mainAxisSpacing: 10,
@@ -75,7 +83,6 @@ class DashboardPage extends StatelessWidget {
                           return Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              // Logo dentro del botón
                               ElevatedButton(
                                 onPressed: () {
                                   // Acción cuando se presiona el botón
@@ -83,7 +90,6 @@ class DashboardPage extends StatelessWidget {
                                 child:  SvgPicture.network(
                                   color: Colors.white,
                                   //dar mayor grosor a los iconos
-                      
                                   state.dashboardItems[index].icon,
                                   width: 75,
                                   height: 75,
@@ -91,7 +97,7 @@ class DashboardPage extends StatelessWidget {
                                 style: ElevatedButton.styleFrom(
                                   shape: CircleBorder(), // Forma circular para el botón
                                   padding: EdgeInsets.all(16), // Espaciado interno
-                                  backgroundColor: Color(0xff582C5F)
+                                  backgroundColor: Theme.of(context).colorScheme.primary
                                 ),
                               ),
                               SizedBox(height: 10), // Espacio entre el botón y el texto
@@ -100,6 +106,7 @@ class DashboardPage extends StatelessWidget {
                                 state.dashboardItems[index].title,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
+                                  fontWeight: FontWeight.w500,
                                   fontSize: 16,
                                 ),
                               ),
@@ -122,6 +129,21 @@ class DashboardPage extends StatelessWidget {
                 child: Text('Sin datos para mostrar'),
               );
             },
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              ThemeMode? themeMode = EasyDynamicTheme.of(context).themeMode;
+
+              print('theme: $themeMode');
+
+              if (themeMode == ThemeMode.system || themeMode == ThemeMode.light) 
+              {
+                return EasyDynamicTheme.of(context).changeTheme(dark: true);
+              }
+
+              EasyDynamicTheme.of(context).changeTheme(dark: false);
+            },
+            child: const Icon(Icons.sunny),
           ),
         ),
       ),
