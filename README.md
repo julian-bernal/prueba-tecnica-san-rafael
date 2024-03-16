@@ -1,16 +1,9 @@
 # prueba_tecnica_san_rafael
 
-A new Flutter project.
+Pruena técnica para la clinica San Rafael
 
-## Getting Started
+## Anotaciones
 
-This project is a starting point for a Flutter application.
+La versión del SDK empleado para el desarrollo de la prueba es  3.16.9
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
